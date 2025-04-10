@@ -6,7 +6,7 @@
 
 namespace storage
 {
-    const char *Config_File = "Storage.conf";
+    const char *config_path = "Storage.conf";
 
     //
     // 配置文件读取类
@@ -19,32 +19,30 @@ namespace storage
         std::string download_prefix_;
         std::string deep_storage_dir_;
         std::string low_storage_dir_;
-        int bundle_format_;
+        int bundle_format_; // 压缩格式
         std::string storage_info_;
     public:
         static std::mutex _mutex;  // 声明（告诉编译器存在这个静态成员）
         static Config *_instance; // 声明 单例模式
         Config()
-        {
-            if (!ReadConfig()) // 读取配置文件
-            {
+        { 
+            // 读取配置文件
+            if (!ReadConfig()) {
             }
         }
     public:
         //
         // 读取配置文件 
         //
-        bool ReadConfig()
-        {
-            
+        bool ReadConfig() {
             Json::Value config_json;
-            storage::FileUtil config_file(Config_File);
+            storage::FileUtil config_file_util(config_path);
             std::string config_str;
-            if (!config_file.GetContent(&config_str))
+            if (!config_file_util.GetContent(&config_str)) // 读取配置文件的字符串
             {
                 return false;
             }
-            storage::JSON_util::UnSerialize(config_str, config_json);
+            storage::JSON_util::UnSerialize(config_str, config_json); // 将字符串反序列化为json对象
 
             server_port_ = config_json["server_port"].asInt();
             server_ip_ = config_json["server_ip"].asString();
@@ -60,24 +58,38 @@ namespace storage
         //
         // 获取配置文件内容
         //
+
+        // 获取服务器端口
         int GetServerPort() {
             return server_port_;
         }
+
+        // 获取服务器IP
         std::string GetServerIp() {
             return server_ip_;
         }
+
+        // 获取下载前缀
         std::string GetDownloadPrefix() {
             return download_prefix_;
         }
+
+        // 获取压缩格式
         int GetBundleFormat() {
             return bundle_format_;
         }
+
+        // 获取深度存储目录
         std::string GetDeepStorageDir() {
             return deep_storage_dir_;
         }
+
+        // 获取低存储目录
         std::string GetLowStorageDir() {
             return low_storage_dir_;
         }
+
+        // 获取存储信息文件路径
         std::string GetStorageInfoFile() {
             return storage_info_;
         }

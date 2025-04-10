@@ -21,6 +21,8 @@ namespace storage
 {
     //
     // 文件操作类
+    // 传入一个文件名，创建一个FileUtil对象，该对象可以对该文件进行操作
+    // #### 提供文件操作的接口：
     // - bool Exist() : 判断文件是否存在
     // - int64_t FileSize() : 获取文件大小
     // - size_t GetLastAccessTime() : 获取文件最近访问时间
@@ -142,7 +144,7 @@ namespace storage
         }
 
         //
-        // 获取文件内容
+        // 获取文件内容到content中
         // - 返回值为true表示成功
         // - 返回值为false表示失败
         bool GetContent(std::string *content) {
@@ -218,6 +220,7 @@ namespace storage
         static bool Serialize(const Json::Value &root, std::string &content)
         {
             Json::StreamWriterBuilder wbuilder;
+            wbuilder["emitUTF8"] = true; // 支持中文
             wbuilder["indentation"] = "\t";
             content = Json::writeString(wbuilder, root);
             return true;
