@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网盘 - 上传和下载文件</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="file"], input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .file-list {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .file-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .file-list li {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .file-list li:last-child {
+            border-bottom: none;
+        }
+        .file-list a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .file-list a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>网盘 - 上传和下载文件</h1>
+
+        <!-- 上传文件表单 -->
+        <div class="form-group">
+            <label for="file-upload">选择文件上传</label>
+            <input type="file" id="file-upload" name="file-upload">
+        </div>
+        <button onclick="uploadFile()">上传文件</button>
+
+        <!-- 下载文件表单 -->
+        <div class="file-list">
+            <h2>文件列表</h2>
+            <ul>
+                <li><a href="#" download="example.txt">example.txt</a></li>
+                <li><a href="#" download="sample.pdf">sample.pdf</a></li>
+                <li><a href="#" download="image.png">image.png</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function uploadFile() {
+            const fileInput = document.getElementById('file-upload');
+            const file = fileInput.files[0];
+            if (file) {
+                alert(`文件 "${file.name}" 已上传成功！`);
+                // 这里可以添加实际的上传逻辑，例如通过 AJAX 上传到服务器
+            } else {
+                alert("请选择一个文件！");
+            }
+        }
+    </script>
+</body>
+</html>
