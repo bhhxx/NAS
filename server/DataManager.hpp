@@ -61,6 +61,7 @@ namespace storage
                 info.fsize_ = e["fsize_"].asUInt64();
                 FileUtil file_util(info.storage_path_);
                 if (!file_util.Exist()) { // 文件不存在
+                    Store();
                     continue;
                 }
                 Insert(info); // 将json对象中的信息插入到map中
