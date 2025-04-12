@@ -16,3 +16,6 @@ Ubuntu 24.04.1 LTS on WSL2
 git clone git@github.com:bhhxx/NAS.git
 ```
 ### make
+
+## Acknowledgment
+Thanks to https://github.com/youngyangyang04/Kama-AsynLogSystem-CloudStorage
